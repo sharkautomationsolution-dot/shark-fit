@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#090b0d"><title>SHARK FIT 2.0</title>
+<style>
+:root{--bg:#090b0d;--card:#14181d;--card2:#1d232a;--line:#2b333c;--txt:#f5f7f8;--muted:#9aa5ae;--lime:#caff55;--cyan:#72e4d5}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--txt);font:15px/1.45 system-ui,-apple-system,Segoe UI,sans-serif}
+header{position:sticky;top:0;z-index:9;background:#090b0df2;backdrop-filter:blur(15px);border-bottom:1px solid var(--line);padding:14px 17px}
+.wrap{max-width:1050px;margin:auto}.head{display:flex;align-items:center;justify-content:space-between}.logo{font-size:21px;font-weight:950;letter-spacing:1.5px}.logo span{color:var(--lime)}.sub{font-size:10px;letter-spacing:2px;color:var(--muted)}
+main{max-width:1050px;margin:auto;padding:18px 15px 90px}.hero{border:1px solid #34402a;border-radius:23px;padding:23px;background:radial-gradient(circle at 90% 0,#37451f 0,transparent 40%),linear-gradient(135deg,#1a2118,#12161a);margin-bottom:17px}
+.kicker{color:var(--lime);font-weight:850;font-size:11px;letter-spacing:2px}.hero h1{font-size:clamp(30px,6vw,48px);line-height:1.02;margin:9px 0}.hero p{color:#c0c9c2;max-width:600px;margin:0}
+nav{display:flex;gap:8px;overflow:auto;margin:17px 0}.tab{white-space:nowrap;border:1px solid var(--line);border-radius:30px;padding:10px 15px;background:var(--card);color:var(--muted);font-weight:750}.tab.on{background:var(--lime);color:#10130b;border-color:var(--lime)}
+.view{display:none}.view.on{display:block}.bar{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:22px 0 12px}.bar h2{font-size:20px;margin:0}.muted{color:var(--muted);font-size:13px}
+button{font:inherit;cursor:pointer}.btn{background:var(--lime);color:#10130b;border:0;border-radius:12px;padding:11px 15px;font-weight:850}.btn.alt{background:var(--card2);border:1px solid var(--line);color:var(--txt)}.btn:disabled{opacity:.45;cursor:not-allowed}
+.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:15px}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:11px}.field{display:flex;flex-direction:column;gap:6px}.field.full{grid-column:1/-1}label{font-size:11px;color:var(--muted);font-weight:800;letter-spacing:.5px}input,select{width:100%;border:1px solid var(--line);border-radius:11px;padding:11px;background:var(--card2);color:var(--txt);font:inherit}
+.upload{border:1px dashed #66727d;border-radius:14px;padding:15px;text-align:center}.upload input{border:0;background:none}.preview{width:100%;height:145px;object-fit:contain;background:#202831;border-radius:12px;display:none;margin-top:8px}
+.items{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:11px}.item{background:var(--card);border:1px solid var(--line);border-radius:15px;overflow:hidden}.item img{width:100%;height:160px;object-fit:contain;background:#202831}.ib{padding:10px}.iname{font-weight:800}.meta{font-size:12px;color:var(--muted)}.del{float:right;border:0;background:none;color:#ff9292;font-size:12px}
+.empty{padding:28px 15px;border:1px dashed var(--line);border-radius:16px;text-align:center;color:var(--muted)}
+.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:13px}.tip{font-size:12px;color:var(--muted);margin-top:10px}
+.look{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:15px;margin-top:12px}.lookhead{display:flex;justify-content:space-between;gap:10px;align-items:center}.score{font-size:29px;font-weight:950;color:var(--lime)}.pieces{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;margin-top:13px}.piece{min-width:0}.piece img{width:100%;height:180px;object-fit:contain;border-radius:13px;background:#202831}.piece b{display:block;font-size:12px;margin-top:5px}.piece small{color:var(--muted)}
+.swatches{display:flex;gap:5px;align-items:center}.swatch{width:16px;height:16px;border-radius:50%;border:1px solid #ffffff55}
+.chip{display:inline-block;border-radius:20px;padding:5px 9px;background:#252d34;color:#dce4e8;font-size:11px;margin:3px 3px 0 0}
+.note{padding:12px;border-left:3px solid var(--cyan);background:#14211f;border-radius:8px;color:#c7e7e2;font-size:13px;margin-top:12px}
+@media(min-width:650px){.items{grid-template-columns:repeat(4,minmax(0,1fr))}.grid{grid-template-columns:repeat(3,minmax(0,1fr))}.pieces{grid-template-columns:repeat(4,minmax(0,1fr))}.piece img{height:225px}}
+</style></head>
+<body>
+<header><div class="wrap head"><div><div class="logo">SHARK <span>FIT</span></div><div class="sub">YOUR PERSONAL WARDROBE STYLIST</div></div><div class="sub">VERSION 2.0</div></div></header>
+<main>
+<section class="hero"><div class="kicker">STYLE SMARTER · SHOP YOUR WARDROBE</div><h1>Your clothes.<br><span style="color:var(--lime)">Endless combinations.</span></h1><p>Save what you own, build outfits for any occasion, check colour harmony and preview complete looks without buying anything new.</p></section>
+<nav><button class="tab on" data-view="wardrobe">Wardrobe</button><button class="tab" data-view="add">＋ Add clothes</button><button class="tab" data-view="stylist">AI-style studio</button><button class="tab" data-view="saved">Saved looks</button></nav>
+
+<section class="view on" id="wardrobe">
+<div class="bar"><div><h2>My wardrobe</h2><div class="muted" id="total">0 items</div></div><button class="btn" onclick="go('add')">＋ Add item</button></div>
+<div class="grid" style="margin-bottom:14px">
+<div class="card"><div class="muted">TOPS</div><b id="topsN">0</b></div><div class="card"><div class="muted">BOTTOMS</div><b id="bottomsN">0</b></div><div class="card"><div class="muted">SHOES</div><b id="shoesN">0</b></div>
+</div><div class="items" id="items"></div>
+</section>
+
+<section class="view" id="add">
+<div class="bar"><div><h2>Add to wardrobe</h2><div class="muted">One item per photo gives the best results.</div></div></div>
+<div class="card"><form id="form"><div class="grid">
+<div class="field full"><label>ITEM PHOTO</label><div class="upload">📷 Select photo from gallery<input id="photo" type="file" accept="image/*" required><img id="preview" class="preview" alt="Selected clothing"></div></div>
+<div class="field"><label>ITEM NAME</label><input id="name" placeholder="e.g. Black baggy jeans" required></div>
+<div class="field"><label>CATEGORY</label><select id="cat"><option>Top</option><option>Bottom</option><option>Shoes</option><option>Outerwear</option><option>Accessory</option></select></div>
+<div class="field"><label>COLOUR</label><select id="color"><option>Black</option><option>White</option><option>Grey</option><option>Beige</option><option>Brown</option><option>Blue</option><option>Navy</option><option>Pink</option><option>Red</option><option>Green</option><option>Yellow</option><option>Purple</option><option>Orange</option><option>Multicolour</option></select></div>
+<div class="field"><label>STYLE</label><select id="style"><option>Casual</option><option>Streetwear</option><option>Smart casual</option><option>Formal</option><option>Sporty</option><option>Party</option></select></div>
+<div class="field"><label>FIT</label><select id="fit"><option>Regular</option><option>Oversized</option><option>Baggy</option><option>Slim</option><option>Relaxed</option></select></div>
+<div class="field"><label>SEASON</label><select id="season"><option>All season</option><option>Summer</option><option>Winter</option><option>Rainy</option></select></div>
+</div><div class="actions"><button class="btn">Save clothing item</button><button type="reset" class="btn alt" onclick="clearPreview()">Clear</button></div></form></div>
+<div class="tip">Photos are stored in this browser on this device. This version does not upload your wardrobe to a server.</div>
+</section>
+
+<section class="view" id="stylist">
+<div class="bar"><div><h2>Outfit studio</h2><div class="muted">Build looks from your own items.</div></div></div>
+<div class="card"><div class="grid">
+<div class="field"><label>OCCASION</label><select id="occasion"><option>Everyday</option><option>College</option><option>Streetwear</option><option>Party</option><option>Date</option><option>Smart casual</option><option>Formal</option></select></div>
+<div class="field"><label>STYLE VIBE</label><select id="vibe"><option>Best overall match</option><option>Baggy streetwear</option><option>Minimal / clean</option><option>Colour pop</option></select></div>
+<div class="field"><label>WEATHER</label><select id="weather"><option>Any weather</option><option>Hot</option><option>Cool</option><option>Rainy</option></select></div>
+</div><div class="actions"><button class="btn" onclick="makeLook()">✨ Create outfit</button><button class="btn alt" onclick="makeLook()">Try another ↻</button></div><div class="tip">For now, outfit matching uses your saved category, colour, style, fit and season details. It is a smart rule-based stylist, not a cloud AI model.</div></div>
+<div id="result"><div class="empty" style="margin-top:12px">Your stylist is ready. Add at least one top and one bottom.</div></div>
+</section>
+
+<section class="view" id="saved"><div class="bar"><div><h2>Saved looks</h2><div class="muted">Your favourite combinations.</div></div></div><div id="savedList"><div class="empty">No saved outfits yet.</div></div></section>
+</main>
+<script>
+const K='sharkfit_v2_items',S='sharkfit_v2_saved';let clothes=JSON.parse(localStorage.getItem(K)||'[]'),saved=JSON.parse(localStorage.getItem(S)||'[]'),photoData='';
+const el=id=>document.getElementById(id);
+function go(id){document.querySelectorAll('.view').forEach(x=>x.classList.toggle('on',x.id===id));document.querySelectorAll('.tab').forEach(x=>x.classList.toggle('on',x.dataset.view===id))}
+document.querySelectorAll('.tab').forEach(b=>b.onclick=()=>go(b.dataset.view));
+function persist(){try{localStorage.setItem(K,JSON.stringify(clothes));render()}catch(e){alert('Storage is full. Remove a few photos or use smaller images.')}}
+function esc(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+el('photo').onchange=e=>{let f=e.target.files[0];if(!f)return;if(f.size>2.5*1024*1024){alert('Please use a photo smaller than 2.5 MB.');e.target.value='';return}let r=new FileReader();r.onload=()=>{photoData=r.result;el('preview').src=photoData;el('preview').style.display='block';if(!el('name').value)el('name').value=f.name.replace(/\.[^.]+$/,'').replace(/[-_]/g,' ')};r.readAsDataURL(f)};
+function clearPreview(){photoData='';el('preview').style.display='none'}
+el('form').onsubmit=e=>{e.preventDefault();if(!photoData)return alert('Choose an item photo.');clothes.unshift({id:Date.now(),img:photoData,name:el('name').value,cat:el('cat').value,color:el('color').value,style:el('style').value,fit:el('fit').value,season:el('season').value});persist();e.target.reset();clearPreview();go('wardrobe')};
+function render(){el('total').textContent=clothes.length+' items in your wardrobe';el('topsN').textContent=clothes.filter(x=>x.cat==='Top').length;el('bottomsN').textContent=clothes.filter(x=>x.cat==='Bottom').length;el('shoesN').textContent=clothes.filter(x=>x.cat==='Shoes').length;el('items').innerHTML=clothes.length?clothes.map(x=>`<div class="item"><img src="${x.img}" alt=""><div class="ib"><button class="del" onclick="removeItem(${x.id})">Remove</button><div class="iname">${esc(x.name)}</div><div class="meta">${x.cat} · ${x.color}<br>${x.style} · ${x.fit}</div></div></div>`).join(''):'<div class="empty" style="grid-column:1/-1">Your wardrobe is empty. Add your first clothing photo.</div>';renderSaved()}
+function removeItem(id){if(confirm('Remove this item?')){clothes=clothes.filter(x=>x.id!==id);persist()}}
+const neutrals=['Black','White','Grey','Beige','Brown','Navy'];
+function harmony(a,b){if(a===b)return 7;if(neutrals.includes(a)||neutrals.includes(b))return 9;if((a==='Blue'&&b==='Brown')||(a==='Pink'&&b==='Grey')||(a==='Green'&&b==='Beige')||(a==='Navy'&&b==='White')||(a==='Red'&&b==='Black')||(a==='Purple'&&b==='Grey'))return 9;if(a==='Multicolour'||b==='Multicolour')return 7;return 6}
+function makeLook(){let tops=clothes.filter(x=>x.cat==='Top'),bots=clothes.filter(x=>x.cat==='Bottom'),shoes=clothes.filter(x=>x.cat==='Shoes'),layers=clothes.filter(x=>x.cat==='Outerwear');if(!tops.length||!bots.length){el('result').innerHTML='<div class="empty">Add at least one top and one bottom first.</div>';return}
+let occ=el('occasion').value,vibe=el('vibe').value,weather=el('weather').value,arr=[];
+tops.forEach(t=>bots.forEach(b=>{let sc=harmony(t.color,b.color);if(t.style===b.style)sc+=1;if(occ==='Streetwear'&&(t.style==='Streetwear'||b.style==='Streetwear'))sc+=2;if(occ==='Formal'&&(t.style==='Formal'||b.style==='Formal'))sc+=3;if(occ==='College'&&(t.style==='Casual'||b.style==='Casual'))sc+=1;if(vibe==='Baggy streetwear'&&(t.fit==='Baggy'||t.fit==='Oversized'||b.fit==='Baggy'))sc+=2;if(vibe==='Minimal / clean'&&neutrals.includes(t.color)&&neutrals.includes(b.color))sc+=2;if(vibe==='Colour pop'&&!neutrals.includes(t.color)&&!neutrals.includes(b.color))sc+=2;if(weather==='Hot'&&(t.season==='Summer'||t.season==='All season'))sc+=1;if(weather==='Cool'&&(t.season==='Winter'||t.season==='All season'))sc+=1;arr.push({t,b,sc})}));
+arr.sort((a,b)=>b.sc-a.sc);let shortlist=arr.slice(0,Math.min(5,arr.length)),choice=shortlist[Math.floor(Math.random()*shortlist.length)],shoe=shoes.length?shoes[Math.floor(Math.random()*shoes.length)]:null,layer=(weather==='Cool'||weather==='Rainy')&&layers.length?layers[Math.floor(Math.random()*layers.length)]:null;let parts=[['TOP',choice.t],['BOTTOM',choice.b]];if(shoe)parts.push(['SHOES',shoe]);if(layer)parts.push(['LAYER',layer]);let rating=Math.min(10,Math.max(6,Math.round(choice.sc/2)));let look={id:Date.now(),occasion:occ,rating,parts,note:harmony(choice.t.color,choice.b.color)>=9?'Strong colour pairing.':'A simple pairing; keep accessories understated.'};window.lastLook=look;showLook(look,true)}
+function showLook(l,saveButton){el('result').innerHTML=`<div class="look"><div class="lookhead"><div><div class="kicker">YOUR OUTFIT</div><h2 style="margin:4px 0">${esc(l.occasion)} look</h2></div><div style="text-align:right"><div class="score">${l.rating}/10</div><small class="muted">style score</small></div></div><div class="pieces">${l.parts.map(([tag,x])=>`<div class="piece"><img src="${x.img}" alt=""><b>${tag}</b><small>${esc(x.name)}</small></div>`).join('')}</div><div class="note">${esc(l.note)} The score is a styling heuristic, not a professional or AI judgement.</div>${saveButton?'<div class="actions"><button class="btn" onclick="saveLook()">♡ Save this look</button><button class="btn alt" onclick="makeLook()">Generate another</button></div>':''}</div>`}
+function saveLook(){if(!window.lastLook)return;saved.unshift(window.lastLook);localStorage.setItem(S,JSON.stringify(saved));renderSaved();go('saved')}
+function renderSaved(){el('savedList').innerHTML=saved.length?saved.map(l=>`<div class="look"><div class="lookhead"><b>${esc(l.occasion)} · ${l.rating}/10</b><button class="del" onclick="deleteLook(${l.id})">Remove</button></div><div class="pieces">${l.parts.map(([tag,x])=>`<div class="piece"><img src="${x.img}" alt=""><b>${tag}</b><small>${esc(x.name)}</small></div>`).join('')}</div></div>`).join(''):'<div class="empty">No saved outfits yet. Generate a look and save it.</div>'}
+function deleteLook(id){saved=saved.filter(x=>x.id!==id);localStorage.setItem(S,JSON.stringify(saved));renderSaved()}
+render();
+</script></body></html>
